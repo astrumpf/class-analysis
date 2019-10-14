@@ -1,0 +1,89 @@
+---
+title: "Gapminder analysis"
+author: "Andrew Strumpf"
+date: "10/14/2019"
+output: 
+  html_document:
+    keep_md: yes
+    fig_caption: yes
+    toc: yes
+---
+
+# Introduction
+
+Here is my first RMarkdown (rmd) document. Because toc is yes any hashtag appears as the table of contents
+
+# Let's embed some R code
+
+First, let's write an R chunk that loads the tidyverse package and then reads in the Gapminder data set from the data subdirectory of the project. 
+
+To create a new R chunk: CTRL + ALT + I
+
+```{r, message=FALSE}
+library(tidyverse)
+gm <- read.csv("Data/gapminder.csv")
+
+```
+
+# Investigate gm data
+
+What will it show us????
+
+```{r}
+head(gm)
+```
+
+
+# Our first plot
+
+Shows gdp per capita on x and life expectancy on y
+
+```{r, fig.cap="Life Expectancy v. GDP"}
+ggplot(gm, aes(x = gdpPercap, y = lifeExp)) + geom_point()
+```
+
+
+# A better plot
+
+```{r, fig.cap="Life Expectancy v. GDP w/ color", fig.width=5}
+ggplot(gm, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(aes(col = continent)) +
+  scale_x_log10()
+
+```
+
+#Alternative chunk options
+
+Options include:
+- echo (TRUE by default), etlls whether to include code in the output
+- results 
+  - hide will hide the reuslts wow!
+  - hold will hold results until end of the r chunk
+- include (TRUE by default) if FALSE then code will not run aka be evaluated
+- fig.width fig.height dimensions of figure in output
+- cache (FALSE by default) if TRUE saves result from R chunk
+
+# Table in RMarkdown
+
+Preview the ata using head function
+
+```{r}
+head(gm)
+```
+
+now head funciton as a nice and neat formatted table
+
+
+```{r}
+library(knitr)
+kable(head(gm))
+```
+
+If you (me) like tables, look at the **gt** table *package*
+
+
+
+
+
+
+
